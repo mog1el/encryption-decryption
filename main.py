@@ -82,7 +82,15 @@ if os.stat("encrypted.txt").st_size == 0:
             encrypted_message.append("1")
     encrypted_message = [bin(int(x))[2:] for x in encrypted_message]
     encrypted_message = [s.zfill(6) for s in encrypted_message]
-    for i in encrypted_message:
-        step = i%len(bina)
-        print(encrypted_message[i] ^ bina[step])
-print(encrypted_message)
+    def xor_strings(str1, str2):
+        return ''.join(str(int(bit1) ^ int(bit2)) for bit1, bit2 in zip(str1, str2))
+    for i in range (len(encrypted_message)):
+        step = i%4
+        result_list = [xor_strings(s1, s2) for s1, s2 in zip(encrypted_message[i], bina[step])]
+        print(bina[step])
+        encrypted_message[i] = ''.join(result_list)
+    for i in range (len(encrypted_message)):
+        encrypted_message[i] = int(encrypted_message[i], 2)
+    with open("encrypted.txt", "a") as file:
+        encrypted_message = ''.join(map(str, encrypted_message))
+        file.write(encrypted_message)
