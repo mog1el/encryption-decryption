@@ -26,7 +26,7 @@ steps = 1
 encrypted_message = []
 if os.stat("encrypted.txt").st_size == 0:
     print("I see that you don't have a message that you want to decrypt")
-    print("What message would you like to encrypt? (without numbers and special characters)")
+    print("What message would you like to encrypt? (without numbers)")
     message_encryption = str(input())
     #in the future I'm going to make this encryption more random by including in the key something to automate translating letters to numbers
     char_to_number = {
@@ -35,7 +35,7 @@ if os.stat("encrypted.txt").st_size == 0:
         'k': '23', 'l': '25', 'm': '18', 'n': '10', 'o': '11',
         'p': '3', 'q': '9', 'r': '8', 's': '15', 't': '26',
         'u': '19', 'v': '2', 'w': '16', 'x': '17', 'y': '4',
-        'z': '1'
+        'z': '1', ' ': '27', ',': '28', '.': '29', '?': '30', '!': '31'
     }
     for char in message_encryption:
         encrypted_message.append(char_to_number[char.lower()])
@@ -70,7 +70,7 @@ else:
         '23': 'k', '25': 'l', '18': 'm', '10': 'n', '11': 'o',
         '3': 'p', '9': 'q', '8': 'r', '15': 's', '26': 't',
         '19': 'u', '2': 'v', '16': 'w', '17': 'x', '4': 'y',
-        '1': 'z'
+        '1': 'z', '27': ' ', '28': ',', '29': '.', '30': '?', '31': '!'
     }
     for number in message_decryption:
         if str(number) in number_to_char:
