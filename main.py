@@ -42,7 +42,7 @@ if os.stat("encrypted.txt").st_size == 0:
     encrypted_message = [bin(int(x))[2:] for x in encrypted_message]
     encrypted_message = [s.zfill(6) for s in encrypted_message]
     for i in range (len(encrypted_message)):
-        step = i%4
+        step = i % 4
         result_list = [xor_strings(s1, s2) for s1, s2 in zip(encrypted_message[i], bina[step])]
         encrypted_message[i] = ''.join(result_list)
     for i in range (len(encrypted_message)):
