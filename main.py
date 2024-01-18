@@ -9,7 +9,7 @@ if os.stat("key.txt").st_size == 0:
     if_key = input("Looks like you don't have a key. Should I generate a new one? (Y/N)")
     if if_key == "Y":
         print("Generating a new key")
-        new_key = random.randint(1024, 4058)
+        new_key = random.randint(9999, 99999999)
         key.write(str(new_key))
         print("Key generated")
     else:
@@ -42,9 +42,10 @@ if os.stat("encrypted.txt").st_size == 0:
     encrypted_message = [bin(int(x))[2:] for x in encrypted_message]
     encrypted_message = [s.zfill(6) for s in encrypted_message]
     for i in range (len(encrypted_message)):
-        step = i % 4
-        result_list = [xor_strings(s1, s2) for s1, s2 in zip(encrypted_message[i], bina[step])]
-        encrypted_message[i] = ''.join(result_list)
+        step = i % len(bina)
+        if i < len(encrypted_message) and step < len(bina):
+            result_list = [xor_strings(s1, s2) for s1, s2 in zip(encrypted_message[i], bina[step])]
+            encrypted_message[i] = ''.join(result_list)
     for i in range (len(encrypted_message)):
         encrypted_message[i] = int(encrypted_message[i], 2)
     with open("encrypted.txt", "a") as file:
@@ -59,7 +60,7 @@ else:
     message_decryption = [int(file_content[i:i+2]) for i in range(0, len(file_content), 2)]
     message_decryption = [bin(int(x))[2:] for x in message_decryption]
     for i in range (len(message_decryption)):
-        step = i%4
+        step = i % len(bina)
         result_list = [xor_strings(s1, s2) for s1, s2 in zip(message_decryption[i], bina[step])]
         message_decryption[i] = ''.join(result_list)
     for i in range (len(message_decryption)):
