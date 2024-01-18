@@ -14,6 +14,7 @@ if os.stat("key.txt").st_size == 0:
         print("Key generated")
     else:
         exit("Exiting the code then")
+key.close()
 
 bina = []
 with open("key.txt", 'rb') as file:
