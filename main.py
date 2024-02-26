@@ -9,7 +9,7 @@ if os.stat("key.txt").st_size == 0:
     if_key = input("Looks like you don't have a key. Should I generate a new one? (Y/N)")
     if if_key == "Y":
         print("Generating a new key")
-        new_key = random.randint(9999, 99999999)
+        new_key = random.randint(999999, 999999999)
         key.write(str(new_key))
         print("Key generated")
     else:
@@ -30,6 +30,7 @@ if os.stat("encrypted.txt").st_size == 0:
     print("What message would you like to encrypt? (without numbers)")
     message_encryption = str(input())
     #in the future I'm going to make this encryption more random by including in the key something to automate translating letters to numbers
+    #if you want to add your own chars, feel free to just add them to this and the next dictionary (I'll do it both into one dictionary in the future)
     char_to_number = {
         'a': '7', 'b': '14', 'c': '5', 'd': '13', 'e': '20',
         'f': '22', 'g': '12', 'h': '21', 'i': '24', 'j': '6',
